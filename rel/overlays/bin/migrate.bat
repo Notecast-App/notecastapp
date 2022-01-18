@@ -1,0 +1,1 @@
+call "%~dp0\notecastapp" eval Notecastapp.Release.migrate
