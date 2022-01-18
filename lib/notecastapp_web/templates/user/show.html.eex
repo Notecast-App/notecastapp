@@ -1,0 +1,4 @@
+<h1>Individual user</h1>
+
+<%= render "user.html", user: @user %>
+

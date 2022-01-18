@@ -23,6 +23,7 @@ defmodule NotecastappWeb do
 
       import Plug.Conn
       import NotecastappWeb.Gettext
+      import NotecastappWeb.Auth, only: [authenticate_user: 2]
       alias NotecastappWeb.Router.Helpers, as: Routes
     end
   end
@@ -74,6 +75,7 @@ defmodule NotecastappWeb do
       import Plug.Conn
       import Phoenix.Controller
       import Phoenix.LiveView.Router
+      import NotecastappWeb.Auth, only: [authenticate_user: 2]
     end
   end
 
