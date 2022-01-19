@@ -1,34 +1,34 @@
 defmodule NotecastappWeb.DocumentController do
   use NotecastappWeb, :controller
 
-  alias Notecastapp.Container
-  alias Notecastapp.Container.Document
+  alias Notecastapp.Containers
+  alias Notecastapp.Containers.Document
   alias Notecastapp.SpeechService
   alias Notecastapp.Parse
 
   def index(conn, _params) do
-    documents = Container.list_documents()
+    documents = Containers.list_documents()
     render(conn, "index.html", documents: documents)
   end
 
   def new(conn, %{"folder_id" => folder_id}) do
-    changeset = Container.change_document(%Document{})
-    folder = Container.get_folder!(folder_id)
-    documents = Container.list_folder_documents(folder)
+    changeset = Containers.change_document(%Document{})
+    folder = Containers.get_folder!(folder_id)
+    documents = Containers.list_folder_documents(folder)
     render(conn, "new.html", changeset: changeset, folder: folder, documents: documents)
   end
 
   def create(conn, %{"document" => document_params, "folder_id" => folder_id}) do
-    folder = Container.get_folder!(folder_id)
+    folder = Containers.get_folder!(folder_id)
 
-    case Container.create_document(folder_id, document_params) do
+    case Containers.create_document(folder_id, document_params) do
       {:ok, document} ->
         document
         |> Parse.parse(folder)
         |> SpeechService.synthesise(document)
 
         conn
-        # |> put_flash(:info, "document created successfully.")
+        # |> put_flash(:info, "Document created successfully.")
         |> redirect(to: Routes.folder_document_path(conn, :show, folder, document.id))
 
       # document
@@ -41,25 +41,25 @@ defmodule NotecastappWeb.DocumentController do
 
   def show(conn, %{"id" => id, "folder_id" => folder_id}) do
     IO.puts "am i here"
-    document = Container.get_document!(id)
-    folder = Container.get_folder!(folder_id)
-    documents = Container.list_folder_documents(folder)
+    document = Containers.get_document!(id)
+    folder = Containers.get_folder!(folder_id)
+    documents = Containers.list_folder_documents(folder)
     render(conn, "show.html", document: document, folder: folder, documents: documents)
   end
 
   def edit(conn, %{"id" => id, "folder_id" => folder_id}) do
-    document = Container.get_document!(id)
-    changeset = Container.change_document(document)
-    folder = Container.get_folder!(folder_id)
-    documents = Container.list_folder_documents(folder)
+    document = Containers.get_document!(id)
+    changeset = Containers.change_document(document)
+    folder = Containers.get_folder!(folder_id)
+    documents = Containers.list_folder_documents(folder)
     render(conn, "edit.html", document: document, changeset: changeset, folder: folder, documents: documents)
   end
 
   def update(conn, %{"id" => id, "document" => document_params, "folder_id" => folder}) do
-    document = Container.get_document!(id)
-    folder = Container.get_folder!(folder)
+    document = Containers.get_document!(id)
+    folder = Containers.get_folder!(folder)
 
-    case Container.update_document(document, document_params) do
+    case Containers.update_document(document, document_params) do
       {:ok, document} ->
         document
         |> Parse.parse(folder)
@@ -74,14 +74,14 @@ defmodule NotecastappWeb.DocumentController do
   end
 
   def delete(conn, %{"id" => id, "folder_id" => folder_id}) do
-    document = Container.get_document!(id)
-    folder = Container.get_folder!(folder_id)
+    document = Containers.get_document!(id)
+    folder = Containers.get_folder!(folder_id)
 
 
     # render(conn, "show.html", document: document, folder: folder, documents: documents)
-    {:ok, _document} = Container.delete_document(document)
+    {:ok, _document} = Containers.delete_document(document)
 
-    documents = Container.list_folder_documents(folder)
+    documents = Containers.list_folder_documents(folder)
 
     if length(documents) > 0 do
       conn
@@ -90,7 +90,7 @@ defmodule NotecastappWeb.DocumentController do
     end
 
     conn
-    |> put_flash(:info, "document deleted successfully.")
+    |> put_flash(:info, "Document deleted successfully.")
     # |> redirect(to: Routes.folder_document_path(conn, :index, folder_id))
   end
 end

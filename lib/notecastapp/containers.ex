@@ -1,12 +1,14 @@
 defmodule Notecastapp.Containers do
   @moduledoc """
   The Containers context.
+  101568189041
   """
 
   import Ecto.Query, warn: false
   alias Notecastapp.Repo
 
   alias Notecastapp.Containers.Folder
+  alias Notecastapp.Accounts
 
   @doc """
   Returns the list of folders.
@@ -49,9 +51,10 @@ defmodule Notecastapp.Containers do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_folder(attrs \\ %{}) do
+  def create_folder(%Accounts.User{} = user, attrs \\ %{}) do
     %Folder{}
     |> Folder.changeset(attrs)
+    |> Ecto.Changeset.put_assoc(:user, user)
     |> Repo.insert()
   end
 
@@ -102,7 +105,34 @@ defmodule Notecastapp.Containers do
     Folder.changeset(folder, attrs)
   end
 
-  alias Notecastapp.Containers.Document
+  def list_user_folders(%Accounts.User{} = user) do
+    Folder
+    |> user_folders_query(user)
+    |> Repo.all()
+  end
+
+  def get_user_folder!(%Accounts.User{} = user, id) do
+    Folder
+    |> user_folders_query(user)
+    |> Repo.get!(id)
+  end
+
+  defp user_folders_query(query, %Accounts.User{id: user_id}) do
+    from(v in query, where: v.user_id == ^user_id)
+  end
+
+
+  alias Notefolder.Containers.Document
+
+  def list_folder_documents(%Folder{} = folder) do
+    Document
+    |> folder_documents_query(folder)
+    |> Repo.all()
+  end
+  
+  defp folder_documents_query(query, %Folder{id: folder_id}) do
+    from(v in query, where: v.folder_id == ^folder_id)
+  end
 
   @doc """
   Returns the list of documents.
@@ -145,9 +175,12 @@ defmodule Notecastapp.Containers do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_document(attrs \\ %{}) do
+  def create_document(folder_id, attrs \\ %{}) do
+    folder = get_folder!(folder_id)
+
     %Document{}
     |> Document.changeset(attrs)
+    |> Ecto.Changeset.put_assoc(:folder, folder)
     |> Repo.insert()
   end
 
@@ -185,6 +218,7 @@ defmodule Notecastapp.Containers do
     Repo.delete(document)
   end
 
+
   @doc """
   Returns an `%Ecto.Changeset{}` for tracking document changes.
 
@@ -196,5 +230,105 @@ defmodule Notecastapp.Containers do
   """
   def change_document(%Document{} = document, attrs \\ %{}) do
     Document.changeset(document, attrs)
+  end
+
+  alias Notefolder.Containers.Token
+
+  @doc """
+  Returns the list of tokens.
+
+  ## Examples
+
+      iex> list_tokens()
+      [%Token{}, ...]
+
+  """
+  def list_tokens do
+    Repo.all(Token)
+  end
+
+  @doc """
+  Gets a single token.
+
+  Raises `Ecto.NoResultsError` if the Token does not exist.
+
+  ## Examples
+
+      iex> get_token!(123)
+      %Token{}
+
+      iex> get_token!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_token!(id), do: Repo.get!(Token, id)
+
+  @doc """
+  Creates a token.
+
+  ## Examples
+
+      iex> create_token(%{field: value})
+      {:ok, %Token{}}
+
+      iex> create_token(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_token(attrs \\ %{}) do
+    %Token{}
+    |> Token.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a token.
+
+  ## Examples
+
+      iex> update_token(token, %{field: new_value})
+      {:ok, %Token{}}
+
+      iex> update_token(token, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_token(%Token{} = token, attrs) do
+    token
+    |> Token.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a token.
+
+  ## Examples
+
+      iex> delete_token(token)
+      {:ok, %Token{}}
+
+      iex> delete_token(token)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_token(%Token{} = token) do
+    Repo.delete(token)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking token changes.
+
+  ## Examples
+
+      iex> change_token(token)
+      %Ecto.Changeset{data: %Token{}}
+
+  """
+  def change_token(%Token{} = token, attrs \\ %{}) do
+    Token.changeset(token, attrs)
+  end
+
+  def get_active_token() do
+    List.first(Repo.all(Token))
   end
 end
