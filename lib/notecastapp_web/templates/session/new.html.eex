@@ -1,0 +1,23 @@
+<div class="pt-24 flex justify-center w-full">
+  <div class="w-86">
+    <p class="text-2xl">Log in</p>
+    <p class="text-neutral-500 text-sm font-medium mt-2">Log into an existing account.</p>
+    <div class="mt-12">
+      <%= form_for @conn, Routes.session_path(@conn, :create), [as: :session], fn f -> %>
+        <div class="flex flex-col space-y-4">
+          <div class="">
+          <label class="text-neutral-500 w-36 text-sm font-medium">Email address</label>
+        <%= text_input f, :email, placeholder: "Enter email addresss ...", class: "mt-1 caret-blue-600 rounded-xl w-full border border-neutral-300", autocomplete: "off" %>
+          </div>
+          <div class="">
+          <label class="w-36 text-sm text-neutral-500 font-medium">Password</label>
+        <%= text_input f, :password, type: "password", placeholder: "Enter password ...", class: "mt-1 caret-blue-600 rounded-xl w-full border border-neutral-300", autocomplete: "off" %>
+          </div>
+        </div>
+        <%= submit "Log in", class: "mt-6 w-full hover:bg-sky-200 hover:text-neutral-800 bg-neutral-800 text-white rounded-2xl py-3 px-8 font-medium" %>
+      <% end %>
+      <div class="mt-12 text-center"><%= link "Don't have an account? Sign up", class: "text-sm hover:underline text-neutral-700 cursor-pointer", to: Routes.user_path(@conn, :new) %></div> 
+      <p class="text-sm text-center text-neutral-500 mt-24">© Notecast 2022</p>
+    </div>
+  </div>
+</div>

@@ -7,6 +7,9 @@ module.exports = {
     '../lib/*_web/**/*.*ex'
   ],
   theme: {
+    container: {
+      center: true,
+    },
     extend: {},
   },
   plugins: [
