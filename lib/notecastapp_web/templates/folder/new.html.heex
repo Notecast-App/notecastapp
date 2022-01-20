@@ -1,5 +1,8 @@
-<h1>New Folder</h1>
+<div class="py-12 px-96">
+	<Notecastapp.Button.small_primary_button title="Cancel" route={Routes.folder_path(@conn, :index)} />
+	<div class="mt-8">
+		<Notecastapp.Typography.h1 content="New folder" />
 
-<%= render "form.html", Map.put(assigns, :action, Routes.folder_path(@conn, :create)) %>
-
-<span><%= link "Back", to: Routes.folder_path(@conn, :index) %></span>
+		<%= render "form.html", Map.put(assigns, :action, Routes.folder_path(@conn, :create)) %>
+	</div>
+</div>

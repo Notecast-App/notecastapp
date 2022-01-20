@@ -5,7 +5,115 @@
     </div>
   <% end %>
 
+  <div class="flex flex-col space-y-4 my-6">
+    <div class="flex flex-col space-y-1">
+    <%= label f, :title %>
+    <%= text_input f, :title, class: "rounded-xl border border-neutral-300" %>
+    <%= error_tag f, :title %>
+    </div>
+
+    <div class="flex flex-col space-y-1">
+    <%= label f, :language  %>
+    <%= select f, :language, [[key: "Multilingual", value: "true"], [key: "English-only", value: "false"]], class: "rounded-xl border border-neutral-300" %>
+    <%= error_tag f, :language %>
+    </div>
+
+    <div class="flex flex-col space-y-1">
+    <%= label f, :language_one  %>
+    <%= select f, :language_one, [
+      [key: "🇧🇬 Bulgarian", value: "🇧🇬, bg-BG-KalinaNeural"], 
+      [key: "🇲🇲 Burmese", value: "🇲🇲, my-MM-NilarNeural"], 
+      [key: "🇨🇳 Chinese (Mandarin)", value: "🇨🇳, zh-CN-XiaochenNeural"], 
+      [key: "🇭🇷 Croatian", value: "🇭🇷, hr-HR-GabrijelaNeural"], 
+      [key: "🇨🇿 Czech", value: "🇨🇿, cs-CZ-VlastaNeural"], 
+      [key: "🇩🇰 Danish", value: "🇩🇰, da-DK-ChristelNeural"], 
+      [key: "🇳🇱 Dutch", value: "🇳🇱, nl-NL-ColetteNeural"], 
+      [key: "🇬🇧 English (United Kingdom)", value: "🇬🇧, en-GB-LibbyNeural"], 
+      [key: "🇺🇸 English (United States)", value: "🇺🇸, en-US-AmberNeural"], 
+      [key: "🇪🇪 Estonian", value: "🇪🇪, et-EE-AnuNeural"], 
+      [key: "🇵🇭 Filipino", value: "🇵🇭, fil-PH-BlessicaNeural"], 
+      [key: "🇫🇮 Finnish", value: "🇫🇮, fi-FI-NooraNeural"], 
+      [key: "🇫🇷 French", value: "🇫🇷, fr-FR-DeniseNeural"], 
+      [key: "🇩🇪 German", value: "🇩🇪, de-DE-KatjaNeural"], 
+      [key: "🇧🇬 Bulgarian", value: "🇧🇬, bg-BG-KalinaNeural"], 
+      [key: "🇬🇷 Greek", value: "🇬🇷, el-GR-AthinaNeural"], 
+      [key: "🇮🇳 Hindi", value: "🇮🇳, hi-IN-SwaraNeural"], 
+      [key: "🇭🇺 Hungarian", value: "🇭🇺, hu-HU-NoemiNeural"], 
+      [key: "🇮🇩 Indonesian", value: "🇮🇩, id-ID-GadisNeural"], 
+      [key: "🇮🇪 Irish", value: "🇮🇪, ga-IE-OrlaNeural"], 
+      [key: "🇮🇹 Italian", value: "🇮🇹, it-IT-DiegoNeural"], 
+      [key: "🇯🇵 Japanese", value: "🇯🇵, ja-JP-NanamiNeural"], 
+      [key: "🇰🇷 Korean", value: "🇰🇷, ko-KR-SunHiNeural"],
+      [key: "🇱🇻 Latvian", value: "🇱🇻, lv-LV-EveritaNeural"],
+      [key: "🇱🇹 Lithuanian", value: "🇱🇹, lt-LT-OnaNeural"],
+      [key: "🇲🇾 Malay", value: "🇲🇾, ms-MY-YasminNeural"],
+      [key: "🇳🇴 Norwegian", value: "🇳🇴, nb-NO-IselinNeural"],
+      [key: "🇮🇷 Persian", value: "🇮🇷, fa-IR-DilaraNeural"],
+      [key: "🇵🇱 Polish", value: "🇵🇱, pl-PL-AgnieszkaNeural"],
+      [key: "🇧🇷 Portugese", value: "🇧🇷, pt-PT-DuarteNeural"],
+      [key: "🇷🇴 Romanian", value: "🇷🇴, ro-RO-AlinaNeural"],
+      [key: "🇷🇺 Russian", value: "🇷🇺, ru-RU-DariyaNeural"],
+      [key: "🇸🇰 Slovak", value: "🇸🇰, sk-SK-ViktoriaNeural"],
+      [key: "🇸🇮 Slovenian", value: "🇸🇮, sl-SI-PetraNeural"],
+      [key: "🇸🇴 Somali", value: "🇸🇴, so-SO-UbaxNeural"],
+      [key: "🇸🇪 Swedish", value: "🇸🇪, sv-SE-HilleviNeural"],
+      [key: "🇹🇭 Thai", value: "🇹🇭, th-TH-NiwatNeural"],
+      [key: "🇹🇷 Turkish", value: "🇹🇷, tr-TR-EmelNeural"],
+      [key: "🇺🇦 Ukrainian", value: "🇺🇦, uk-UA-PolinaNeural"],
+      [key: "🇻🇳 Vietnamese", value: "🇻🇳, vi-VN-HoaiMyNeural"]
+      ], class: "rounded-xl border border-neutral-300" %>
+    <%= error_tag f, :language_one %>
+    </div>
+
+    <div class="flex flex-col space-y-1">
+    <%= label f, :language_two  %>
+    <%= select f, :language_two, [
+      [key: "🇧🇬 Bulgarian", value: "🇧🇬, bg-BG-KalinaNeural"], 
+      [key: "🇲🇲 Burmese", value: "🇲🇲, my-MM-NilarNeural"], 
+      [key: "🇨🇳 Chinese (Mandarin)", value: "🇨🇳, zh-CN-XiaochenNeural"], 
+      [key: "🇭🇷 Croatian", value: "🇭🇷, hr-HR-GabrijelaNeural"], 
+      [key: "🇨🇿 Czech", value: "🇨🇿, cs-CZ-VlastaNeural"], 
+      [key: "🇩🇰 Danish", value: "🇩🇰, da-DK-ChristelNeural"], 
+      [key: "🇳🇱 Dutch", value: "🇳🇱, nl-NL-ColetteNeural"], 
+      [key: "🇬🇧 English (United Kingdom)", value: "🇬🇧, en-GB-LibbyNeural"], 
+      [key: "🇺🇸 English (United States)", value: "🇺🇸, en-US-AmberNeural"], 
+      [key: "🇪🇪 Estonian", value: "🇪🇪, et-EE-AnuNeural"], 
+      [key: "🇵🇭 Filipino", value: "🇵🇭, fil-PH-BlessicaNeural"], 
+      [key: "🇫🇮 Finnish", value: "🇫🇮, fi-FI-NooraNeural"], 
+      [key: "🇫🇷 French", value: "🇫🇷, fr-FR-DeniseNeural"], 
+      [key: "🇩🇪 German", value: "🇩🇪, de-DE-KatjaNeural"], 
+      [key: "🇧🇬 Bulgarian", value: "🇧🇬, bg-BG-KalinaNeural"], 
+      [key: "🇬🇷 Greek", value: "🇬🇷, el-GR-AthinaNeural"], 
+      [key: "🇮🇳 Hindi", value: "🇮🇳, hi-IN-SwaraNeural"], 
+      [key: "🇭🇺 Hungarian", value: "🇭🇺, hu-HU-NoemiNeural"], 
+      [key: "🇮🇩 Indonesian", value: "🇮🇩, id-ID-GadisNeural"], 
+      [key: "🇮🇪 Irish", value: "🇮🇪, ga-IE-OrlaNeural"], 
+      [key: "🇮🇹 Italian", value: "🇮🇹, it-IT-DiegoNeural"], 
+      [key: "🇯🇵 Japanese", value: "🇯🇵, ja-JP-NanamiNeural"], 
+      [key: "🇰🇷 Korean", value: "🇰🇷, ko-KR-SunHiNeural"],
+      [key: "🇱🇻 Latvian", value: "🇱🇻, lv-LV-EveritaNeural"],
+      [key: "🇱🇹 Lithuanian", value: "🇱🇹, lt-LT-OnaNeural"],
+      [key: "🇲🇾 Malay", value: "🇲🇾, ms-MY-YasminNeural"],
+      [key: "🇳🇴 Norwegian", value: "🇳🇴, nb-NO-IselinNeural"],
+      [key: "🇮🇷 Persian", value: "🇮🇷, fa-IR-DilaraNeural"],
+      [key: "🇵🇱 Polish", value: "🇵🇱, pl-PL-AgnieszkaNeural"],
+      [key: "🇧🇷 Portugese", value: "🇧🇷, pt-PT-DuarteNeural"],
+      [key: "🇷🇴 Romanian", value: "🇷🇴, ro-RO-AlinaNeural"],
+      [key: "🇷🇺 Russian", value: "🇷🇺, ru-RU-DariyaNeural"],
+      [key: "🇸🇰 Slovak", value: "🇸🇰, sk-SK-ViktoriaNeural"],
+      [key: "🇸🇮 Slovenian", value: "🇸🇮, sl-SI-PetraNeural"],
+      [key: "🇸🇴 Somali", value: "🇸🇴, so-SO-UbaxNeural"],
+      [key: "🇸🇪 Swedish", value: "🇸🇪, sv-SE-HilleviNeural"],
+      [key: "🇹🇭 Thai", value: "🇹🇭, th-TH-NiwatNeural"],
+      [key: "🇹🇷 Turkish", value: "🇹🇷, tr-TR-EmelNeural"],
+      [key: "🇺🇦 Ukrainian", value: "🇺🇦, uk-UA-PolinaNeural"],
+      [key: "🇻🇳 Vietnamese", value: "🇻🇳, vi-VN-HoaiMyNeural"]
+      ], class: "rounded-xl border border-neutral-300" %>
+    <%= error_tag f, :language_two %>
+    </div>
+  </div>
+
   <div>
-    <%= submit "Save" %>
+    <%= submit "Save", class: "hover:bg-sky-200 hover:text-neutral-800 bg-neutral-800 text-white rounded-2xl py-3 px-8 font-medium" %>
   </div>
 </.form>

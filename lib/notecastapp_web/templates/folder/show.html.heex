@@ -1,8 +1,22 @@
-<h1>Show Folder</h1>
-
-<ul>
-
-</ul>
+<div class="pb-48 pt-8 px-20 flex  bg-white  w-full">
+  <div class="w-full flex flex-col">
+    <div class="bg-white mt-4 pb-4 border-b flex flex-row">
+      <div>
+        <Notecastapp.Typography.subheading content="Folder" />
+        <Notecastapp.Typography.h1 content="New doc" />
+      </div>
+      <div class="ml-auto">
+        <Notecastapp.Button.secondary_button title="Edit folder" route={Routes.folder_path(@conn, :edit, @folder)} />
+      </div>
+    </div>
+    <div class="flex flex-col mt-4">
+      <%= for document <- @documents do %>
+        <%= link document.title, class: "underline text-neutral-600 text-lg tracking-tight font-medium cursor-pointer w-auto", to: Routes.folder_document_path(@conn, :show, @folder.id, document) %>
+      <% end %>
+    </div>
+  </div>
+</div>
 
 <span><%= link "Edit", to: Routes.folder_path(@conn, :edit, @folder) %></span> |
-<span><%= link "Back", to: Routes.folder_path(@conn, :index) %></span>
+<span><%= link "Back", to: Routes.folder_path(@conn, :index) %></span> |
+<span><%= link "Create an document", to: Routes.folder_document_path(@conn, :new, @folder.id) %></span>
