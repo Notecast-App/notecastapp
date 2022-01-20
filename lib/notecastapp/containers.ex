@@ -121,7 +121,6 @@ defmodule Notecastapp.Containers do
     from(v in query, where: v.user_id == ^user_id)
   end
 
-
   alias Notecastapp.Containers.Document
 
   def list_folder_documents(%Folder{} = folder) do
@@ -129,7 +128,7 @@ defmodule Notecastapp.Containers do
     |> folder_documents_query(folder)
     |> Repo.all()
   end
-  
+
   defp folder_documents_query(query, %Folder{id: folder_id}) do
     from(v in query, where: v.folder_id == ^folder_id)
   end
@@ -217,7 +216,6 @@ defmodule Notecastapp.Containers do
   def delete_document(%Document{} = document) do
     Repo.delete(document)
   end
-
 
   @doc """
   Returns an `%Ecto.Changeset{}` for tracking document changes.

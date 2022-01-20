@@ -40,7 +40,7 @@ defmodule NotecastappWeb.DocumentController do
   end
 
   def show(conn, %{"id" => id, "folder_id" => folder_id}) do
-    IO.puts "am i here"
+    IO.puts("am i here")
     document = Containers.get_document!(id)
     folder = Containers.get_folder!(folder_id)
     documents = Containers.list_folder_documents(folder)
@@ -52,7 +52,13 @@ defmodule NotecastappWeb.DocumentController do
     changeset = Containers.change_document(document)
     folder = Containers.get_folder!(folder_id)
     documents = Containers.list_folder_documents(folder)
-    render(conn, "edit.html", document: document, changeset: changeset, folder: folder, documents: documents)
+
+    render(conn, "edit.html",
+      document: document,
+      changeset: changeset,
+      folder: folder,
+      documents: documents
+    )
   end
 
   def update(conn, %{"id" => id, "document" => document_params, "folder_id" => folder}) do
@@ -77,7 +83,6 @@ defmodule NotecastappWeb.DocumentController do
     document = Containers.get_document!(id)
     folder = Containers.get_folder!(folder_id)
 
-
     # render(conn, "show.html", document: document, folder: folder, documents: documents)
     {:ok, _document} = Containers.delete_document(document)
 
@@ -85,12 +90,16 @@ defmodule NotecastappWeb.DocumentController do
 
     if length(documents) > 0 do
       conn
-        # folder_document_path(conn_or_endpoint, :show, folder_id, id, params \\ [])
-      |> redirect(to: Routes.folder_document_path(conn, :show, folder_id, List.first(documents).id, documents))
+      # folder_document_path(conn_or_endpoint, :show, folder_id, id, params \\ [])
+      |> redirect(
+        to:
+          Routes.folder_document_path(conn, :show, folder_id, List.first(documents).id, documents)
+      )
     end
 
     conn
     |> put_flash(:info, "Document deleted successfully.")
+
     # |> redirect(to: Routes.folder_document_path(conn, :index, folder_id))
   end
 end

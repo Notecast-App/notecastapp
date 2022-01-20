@@ -28,7 +28,7 @@ defmodule NotecastappWeb.Router do
 
     resources "/folders", FolderController do
     end
-  end 
+  end
 
   # Other scopes may use custom stacks.
   # scope "/api", NotecastappWeb do

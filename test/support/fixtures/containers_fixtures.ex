@@ -10,9 +10,7 @@ defmodule Notecastapp.ContainersFixtures do
   def folder_fixture(attrs \\ %{}) do
     {:ok, folder} =
       attrs
-      |> Enum.into(%{
-
-      })
+      |> Enum.into(%{})
       |> Notecastapp.Containers.create_folder()
 
     folder
@@ -24,9 +22,7 @@ defmodule Notecastapp.ContainersFixtures do
   def document_fixture(attrs \\ %{}) do
     {:ok, document} =
       attrs
-      |> Enum.into(%{
-
-      })
+      |> Enum.into(%{})
       |> Notecastapp.Containers.create_document()
 
     document

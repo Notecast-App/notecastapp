@@ -32,12 +32,13 @@ defmodule NotecastappWeb.FolderController do
 
     if length(documents) > 0 do
       conn
-      |> redirect(to: Routes.folder_document_path(conn, :show, id, List.first(documents).id, documents))
+      |> redirect(
+        to: Routes.folder_document_path(conn, :show, id, List.first(documents).id, documents)
+      )
     else
       conn
       |> redirect(to: Routes.folder_document_path(conn, :new, id))
     end
-
 
     # render(conn, "show.html", folder: folder, documents: documents)
   end

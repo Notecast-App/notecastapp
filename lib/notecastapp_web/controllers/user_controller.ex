@@ -30,7 +30,7 @@ defmodule NotecastappWeb.UserController do
         |> put_flash(:info, "#{user.email} created!")
         |> redirect(to: Routes.cast_path(conn, :index))
 
-        # Tutorial.create_tutorial(user)
+      # Tutorial.create_tutorial(user)
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
