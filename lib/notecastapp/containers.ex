@@ -122,7 +122,7 @@ defmodule Notecastapp.Containers do
   end
 
 
-  alias Notefolder.Containers.Document
+  alias Notecastapp.Containers.Document
 
   def list_folder_documents(%Folder{} = folder) do
     Document
@@ -232,7 +232,7 @@ defmodule Notecastapp.Containers do
     Document.changeset(document, attrs)
   end
 
-  alias Notefolder.Containers.Token
+  alias Notecastapp.API.Token
 
   @doc """
   Returns the list of tokens.
