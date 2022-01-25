@@ -1,5 +1,35 @@
-<h1>Edit Document</h1>
+<div id="editor" class="flex space-x-32 flex-row hidden pt-12">
+    <div class="w-3/12">
+      <Notecastapp.Misc.sidebar current={@document.id} plus={Routes.folder_document_path(@conn, :new, @folder.id)} folder={@folder.id} documents={@documents} title={@folder.title} />
+    </div>
+    <div class="w-9/12">
 
-<%= render "form.html", Map.put(assigns, :action, Routes.document_path(@conn, :update, @document)) %>
+      <%= if @folder.language == true do %>
+      <Notecastapp.Editor.editor render={render "form.html", Map.put(assigns, :action, Routes.folder_document_path(@conn, :update, @folder.id, @document.id))} delete={link "Delete", to: Routes.folder_document_path(@conn, :delete, @folder.id, @document.id), method: :delete, data: [confirm: "Are you sure?"], class: "w-full hover:bg-sky-200  rounded-full border border-neutral-800 text-neutral-800 px-2 py-0.5 font-medium"} cancel={Routes.folder_document_path(@conn, :show, @folder.id, @document)} items={%{"#{List.first(String.split(@folder.language_one, ","))}": "#caf0cb", "#{List.first(String.split(@folder.language_two, ","))}": "#f9d7a7"}} title={@document.title} />
+      <% else %>
+      <Notecastapp.Editor.editor render={render "form.html", Map.put(assigns, :action, Routes.folder_document_path(@conn, :update, @folder.id, @document.id))} delete={link "Delete", to: Routes.folder_document_path(@conn, :delete, @folder.id, @document.id), method: :delete, data: [confirm: "Are you sure?"], class: "w-full hover:bg-sky-200  rounded-full border border-neutral-800 text-neutral-800 px-2 py-0.5 font-medium"} cancel={Routes.folder_document_path(@conn, :show, @folder.id, @document)} items={%{"
+🔈": "#D0E9F9"}} title={@document.title} />
+      <% end %>
+    </div>
+    <div id="hidden-script" class="hidden"><%= raw(@document.script) %></div>
+</div>
 
-<span><%= link "Back", to: Routes.document_path(@conn, :index) %></span>
+<style>
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) { 
+    window.editor.commands.setContent(document.getElementById("hidden-script").innerHTML)
+
+    let editor = document.getElementById("editor");
+    editor.classList.remove("hidden");
+  });
+
+  const addImage = () => {
+    const url = window.prompt('URL')
+
+    if (url) {
+      window.editor.chain().focus().setImage({ src: url }).run()
+    }
+  }
+</script> 

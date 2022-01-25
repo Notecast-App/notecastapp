@@ -27,6 +27,7 @@ defmodule NotecastappWeb.Router do
     pipe_through [:browser, :authenticate_user]
 
     resources "/folders", FolderController do
+      resources "/documents", DocumentController
     end
   end
 

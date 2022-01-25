@@ -5,7 +5,19 @@
     </div>
   <% end %>
 
+  <%= label f, :title, class: "hidden" %>
+  <%= text_input f, :title, id: "title", class: "hidden" %>
+  <%= error_tag f, :title %>
+
+  <%= label f, :script, class: "hidden" %>
+  <%= textarea f, :script, id: "script", class: "hidden" %>
+  <%= error_tag f, :script %>
+
+  <%= label f, :voice, class: "hidden" %>
+  <%= select f, :voice, [[key: "Libby", value: "en-GB-LibbyNeural"], [key: "Sonia", value: "en-GB-SoniaNeural"], [key: "Mia", value: "en-GB-MiaNeural"], [key: "Ryan", value: "en-GB-RyanNeural"], [key: "Dmitry", value: "ru-RU-DmitryNeural"]], class: "hidden" %>
+  <%= error_tag f, :voice %>
+
   <div>
-    <%= submit "Save" %>
+    <%= submit "Save document", id: "submit", class: "hover:bg-sky-200 hover:text-neutral-800 bg-neutral-800 text-white rounded-2xl py-3 px-8 font-medium" %>
   </div>
 </.form>

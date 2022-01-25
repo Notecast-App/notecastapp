@@ -1,8 +1,47 @@
-<h1>Show Document</h1>
+<div id="editor" class="flex space-x-32 flex-row  pt-12">
+    <div class="w-3/12">
+      <Notecastapp.Misc.sidebar current={@document.id} plus={Routes.folder_document_path(@conn, :new, @folder.id)} folder={@folder.id} documents={@documents} title={@folder.title} />
+    </div>
+    <div class="w-9/12">
+        <Notecastapp.Editor.read_only_editor edit={"#{@document.id}/edit"} items={%{English: "#D0E9F9", Chinese: "#F4D8AD"}} title={@document.title} content={raw(@document.script)} />
+        <%= content_tag :audio, src: "https://notefolder-bucket.s3.us-east-2.amazonaws.com/folders/#{@document.filename}", controls: true, class: "hidden", id: "audio" do %>
+        <% end %>
+    </div>
+    <div id="hidden-script" class="hidden"><%= raw(@document.script) %></div>
+</div>
 
-<ul>
+<style>
 
-</ul>
+  mark {
+    cursor: pointer;
+    /*background-color: transparent !important;*/
+  }
 
-<span><%= link "Edit", to: Routes.document_path(@conn, :edit, @document) %></span> |
-<span><%= link "Back", to: Routes.document_path(@conn, :index) %></span>
+  mark:hover {
+    /*background-color: #D1EECE !important;*/
+    filter: invert(1);
+  }
+</style>
+
+<script>
+    const play = (id, rate, button_id, speed) => {
+        const audio = document.getElementById(id)
+        audio.playbackRate = rate; 
+
+        document.getElementById(button_id).innerHTML = `Pause (${speed})`
+
+        audio.addEventListener('ended', () => end(id, button_id, speed))
+
+        if (audio.paused) {
+            audio.play()
+            document.getElementById(button_id).innerHTML = `Pause (${speed})`
+        } else {
+            audio.pause()
+            document.getElementById(button_id).innerHTML = `Listen (${speed})`
+        }
+    }
+
+    const end = (id, button_id, speed) => {
+        document.getElementById(button_id).innerHTML = `Listen (${speed})`
+    }
+</script> 

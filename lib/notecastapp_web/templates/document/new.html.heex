@@ -1,5 +1,46 @@
-<h1>New Document</h1>
+<div id="editor" class="flex space-x-32 flex-row hidden pt-12">
+    <div class="w-3/12">
+      <Notecastapp.Misc.sidebar current={""} plus={Routes.folder_document_path(@conn, :new, @folder.id)}  folder={@folder.id} documents={@documents} title={@folder.title} />
+    </div>
+    <div  class="w-9/12">
+      <%= if @folder.language == true do %>
+      <Notecastapp.Editor.editor render={render 'form.html', Map.put(assigns, :action, Routes.folder_document_path(@conn, :create, @folder.id))} delete={''}, class: {'w-full hover:bg-purple-200  rounded-full border border-neutral-800 text-neutral-800 px-2 py-0.5 font-medium'}} cancel={Routes.folder_path(@conn, :show, @folder.id)} items={%{'#{List.first(String.split(@folder.language_one, ','))}': '#caf0cb', '#{List.first(String.split(@folder.language_two, ','))}': '#f9d7a7'}} title={''} />
+      <%= else %>
+      <Notecastapp.Editor.editor render={render "form.html", Map.put(assigns, :action, Routes.folder_document_path(@conn, :create, @folder.id))} delete={""}, class: {"w-full hover:bg-purple-200  rounded-full border border-neutral-800 text-neutral-800 px-2 py-0.5 font-medium"}} cancel={Routes.folder_path(@conn, :show, @folder.id)} items={%{"
+🔈": "#D0E9F9"}} title={""} />
+      <% end %>
+    </div>
+</div>
 
-<%= render "form.html", Map.put(assigns, :action, Routes.document_path(@conn, :create)) %>
+<style>
+</style>
 
-<span><%= link "Back", to: Routes.document_path(@conn, :index) %></span>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) { 
+    let editor = document.getElementById("editor");
+    editor.classList.remove("hidden");
+  });
+
+
+  const focusParent = () => {
+    // alert("t")
+     const html = editor.getHTML() 
+     if (html === "<p>Enter some text ...</p>") {
+      window.editor.commands.clearContent()
+     }
+  }
+
+  document.addEventListener("keydown", event => {
+    if (event.isComposing || event.keyCode === 9) {
+      focusParent()
+    }
+  });
+
+  const addImage = () => {
+    const url = window.prompt('URL')
+
+    if (url) {
+      window.editor.chain().focus().setImage({ src: url }).run()
+    }
+  }
+</script>   
