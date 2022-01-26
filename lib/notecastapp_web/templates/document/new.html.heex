@@ -4,7 +4,7 @@
     </div>
     <div  class="w-9/12">
       <%= if @folder.language == true do %>
-      <Notecastapp.Editor.editor delete={''}, class: {''}} cancel={Routes.folder_path(@conn, :show, @folder.id)} items={options(@folder)} title={''} />
+        <Notecastapp.Editor.editor render={render "form.html", Map.put(assigns, :action, Routes.folder_document_path(@conn, :create, @folder.id))} delete={''}, class: {''}} cancel={Routes.folder_path(@conn, :show, @folder.id)} items={options(@folder)} title={''} />
       <%= else %>
       <Notecastapp.Editor.editor render={render "form.html", Map.put(assigns, :action, Routes.folder_document_path(@conn, :create, @folder.id))} delete={""}, class: {"w-full hover:bg-purple-200  rounded-full border border-neutral-800 text-neutral-800 px-2 py-0.5 font-medium"}} cancel={Routes.folder_path(@conn, :show, @folder.id)} items={%{"
 🔈": "#D0E9F9"}} title={""} />
