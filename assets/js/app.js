@@ -39,3 +39,44 @@ liveSocket.connect()
 // >> liveSocket.disableLatencySim()
 window.liveSocket = liveSocket
 
+import { Editor } from '@tiptap/core'
+import Highlight from '@tiptap/extension-highlight'
+import Placeholder from '@tiptap/extension-placeholder'
+import StarterKit from '@tiptap/starter-kit'
+import BubbleMenu from '@tiptap/extension-bubble-menu'
+import Image from '@tiptap/extension-image'
+
+window.editor = new Editor({
+  element: document.querySelector('.element'),
+  editorProps: {
+    transformPastedText(text) {
+      return text.replace(/\xA0/g, " ");
+    },
+    transformPastedHTML(html) {
+      return html.replace(/\xA0/g, " ");
+    },
+  },
+  extensions: [
+    Image,
+    Underline,
+    StarterKit,
+    Placeholder.configure({
+      placeholder: "Write something ...",
+    }),
+    Highlight.configure({ multicolor: true }),
+    BubbleMenu.configure({
+      pluginKey: 'bubbleMenu',
+      element: document.querySelector('.menu'),
+    }),
+  ],
+  content: "<p>Enter some text ...</p>",
+  autofocus: false,
+})
+
+document.getElementById("submit").onclick = () => {
+  document.getElementById("title").value = document.getElementById("input-title").value
+	document.getElementById("script").value = editor.getHTML()
+  document.getElementById("submit").innerHTML = "Saving ..."
+  document.getElementById("submit").classList.remove("cursor-pointer")
+  document.getElementById("submit").classList.add("cursor-wait")
+}

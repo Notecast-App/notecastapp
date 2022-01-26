@@ -14,7 +14,6 @@ defmodule Notecastapp.Editor do
 		   </div>
 		   <div class="mt-24 flex flex-row ml-auto sticky bottom-4 space-x-2">
 			   <Notecastapp.Button.secondary_button route={@cancel} title="Cancel" />
-			   <%= @render %>
 		   </div>
 		</div>
 		"""
@@ -39,7 +38,7 @@ defmodule Notecastapp.Editor do
 
 	def title(assigns) do
 		~H"""
-		<input placeholder="Enter document title ..." value={"#{@title}"} class="font-serif font-medium font-heading text-2xl font-extrabold  text-neutral-800 placeholder-neutral-400 " id="input-title" />
+		<input placeholder="Enter document title ..." value={@title} class="font-serif font-medium font-heading text-2xl font-extrabold  text-neutral-800 placeholder-neutral-400 " id="input-title" />
 		"""
 	end
 
@@ -84,19 +83,19 @@ defmodule Notecastapp.Editor do
 
 	def active_link(assigns) do
 		~H"""
-		<a href={"#{@route}"} class="font-medium text-neutral-800"><%= @title %></a>
+		<a href={@route} class="font-medium text-neutral-800"><%= @title %></a>
 		"""
 	end
 
 	def active_sidebar_link(assigns) do
 		~H"""
-		<a href={"#{@route}"} class="bg-neutral-300 rounded-lg px-2 py-1 font-medium text-neutral-800"><%= @title %></a>
+		<a href={@route} class="bg-neutral-300 rounded-lg px-2 py-1 font-medium text-neutral-800"><%= @title %></a>
 		"""
 	end
 
 	def link(assigns) do
 		~H"""
-		<a href={"#{@route}"} class="hover:text-neutral-800 px-2 rounded-lg hover:bg-neutral-200 py-1 font-medium text-neutral-500"><%= @title %></a>
+		<a href={@route} class="hover:text-neutral-800 px-2 rounded-lg hover:bg-neutral-200 py-1 font-medium text-neutral-500"><%= @title %></a>
 		"""
 	end
 end
