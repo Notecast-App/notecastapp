@@ -34,3 +34,6 @@ npm-debug.log
 
 # macOS
 .DS_Store
+
+# Do not commit vendor files 
+/assets/vendor/
