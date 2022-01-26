@@ -2,7 +2,7 @@ defmodule NotecastappWeb.DocumentView do
   use NotecastappWeb, :view
 
   def options(folder) do
-    %{"lang1": "lang1", "lang2": "lang2"}
+    %{"#{List.first(String.split(folder.language_one, ","))}": "#caf0cb", "#{List.first(String.split(folder.language_two, ","))}": "#f9d7a7"}
   end
 
   def language_one_hex() do

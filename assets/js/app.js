@@ -8,7 +8,6 @@
 // import them using relative paths:
 //
 //     import "../vendor/some-package.js"
-//
 // Alternatively, you can `npm install some-package --prefix assets` and import
 // them using a path starting with the package name:
 //
@@ -58,7 +57,6 @@ window.editor = new Editor({
   },
   extensions: [
     Image,
-    Underline,
     StarterKit,
     Placeholder.configure({
       placeholder: "Write something ...",
