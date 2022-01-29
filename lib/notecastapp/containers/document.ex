@@ -7,7 +7,7 @@ defmodule Notecastapp.Containers.Document do
     field :script, :string
     field :voice, :string
     field :filename, :string
-    belongs_to :folder, Notecastapp.Container.Folder
+    belongs_to :folder, Notecastapp.Containers.Folder
 
     timestamps()
   end
