@@ -21,7 +21,7 @@ defmodule NotecastappWeb.Components.Sidebar do
           end
 
           div class: "ml-auto" do
-            c Button, button_style: :primary_small do
+            c Button, onclick: "window.location = '/manage/folders/#{assigns[:folder]}/documents/new'", button_style: :primary_small do
               "+ New"
             end
           end
