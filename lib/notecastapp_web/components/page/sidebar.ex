@@ -31,11 +31,11 @@ defmodule NotecastappWeb.Components.Sidebar do
         div class: "flex flex-col mt-4 space-y-1" do
           for document <- @documents do
             if document.id == assigns[:current] do
-              c Link, link_style: :sidebar do
+              c Link, route: "/manage/folders/#{assigns[:folder]}/documents/#{document.id}", link_style: :sidebar do
                 document.title
               end
             else 
-              c Link, link_style: :inactive do
+              c Link, route: "/manage/folders/#{assigns[:folder]}/documents/#{document.id}", link_style: :inactive do
                 document.title
               end
             end

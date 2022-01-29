@@ -6,7 +6,7 @@ defmodule NotecastappWeb.Components.Link do
     def style(:sidebar), do: "bg-neutral-300 rounded-lg px-2 py-1 font-medium text-neutral-800"
 
     render do
-    	a class: style(@link_style) do
+    	a href: assigns[:route], class: "#{style(@link_style)} cursor-pointer" do
     		slot :default
     	end
     end
