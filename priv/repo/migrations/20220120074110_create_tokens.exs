@@ -3,7 +3,7 @@ defmodule Notecastapp.Repo.Migrations.CreateTokens do
 
   def change do
     create table(:tokens) do
-      add :value, :string
+      add :value, :text
 
       timestamps()
     end

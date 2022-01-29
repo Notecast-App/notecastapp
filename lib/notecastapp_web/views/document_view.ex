@@ -4,6 +4,7 @@ defmodule NotecastappWeb.DocumentView do
 
   alias NotecastappWeb.Components.Sidebar
   alias NotecastappWeb.Components.Editor
+  alias NotecastappWeb.Components.Display
   alias NotecastappWeb.Components.DocumentForm
 
   def options(folder) do

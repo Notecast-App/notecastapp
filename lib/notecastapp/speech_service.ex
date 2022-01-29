@@ -66,7 +66,7 @@ defmodule Notecastapp.SpeechService do
   # Upload the generated audio output
   def upload(output) do
     filename = UUID.uuid4()
-    ExAws.S3.put_object("notefolder-bucket", "folders/#{filename}.mp3", output) |> ExAws.request!()
+    ExAws.S3.put_object("notecast-bucket", "folders/#{filename}.mp3", output) |> ExAws.request!()
     filename
   end
 

@@ -12,9 +12,9 @@ div id: "editor", class: "flex space-x-32 flex-row hidden pt-12" do
 
           text_input f, :script, id: "script", class: "hidden"
 
-          text_input f, :voice, id: "voice", class: "hidden"
+          text_input f, :voice, id: "voice", value: "test", class: "hidden"
 
-          submit class: "hover:bg-sky-200 hover:text-neutral-800 bg-neutral-800 text-white rounded-2xl py-3 px-8 font-medium" do 
+          submit id: "submit", class: "hover:bg-sky-200 hover:text-neutral-800 bg-neutral-800 text-white rounded-2xl py-3 px-8 font-medium" do 
             "Save document"
           end
         end
