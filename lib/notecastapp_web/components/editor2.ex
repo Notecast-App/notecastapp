@@ -1,4 +1,4 @@
-defmodule Notecastapp.Editor do
+defmodule Notecastapp.Editor2 do
 	use Phoenix.Component
 
 	def editor(assigns) do
@@ -14,7 +14,7 @@ defmodule Notecastapp.Editor do
 		   </div>
 		   <div class="mt-24 flex flex-row ml-auto sticky bottom-4 space-x-2">
 			   <Notecastapp.Button.secondary_button route={@cancel} title="Cancel" />
-         <%= @render %>
+	           <%= @render %>
 		   </div>
 		</div>
 		"""

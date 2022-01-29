@@ -28,11 +28,7 @@ defmodule NotecastappWeb.DocumentController do
         |> SpeechService.synthesise(document)
 
         conn
-        # |> put_flash(:info, "Document created successfully.")
         |> redirect(to: Routes.folder_document_path(conn, :show, folder, document.id))
-
-      # document
-      # |> SpeechService.synthesise()
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset, folder: folder)
@@ -40,7 +36,6 @@ defmodule NotecastappWeb.DocumentController do
   end
 
   def show(conn, %{"id" => id, "folder_id" => folder_id}) do
-    IO.puts("am i here")
     document = Containers.get_document!(id)
     folder = Containers.get_folder!(folder_id)
     documents = Containers.list_folder_documents(folder)
@@ -83,14 +78,12 @@ defmodule NotecastappWeb.DocumentController do
     document = Containers.get_document!(id)
     folder = Containers.get_folder!(folder_id)
 
-    # render(conn, "show.html", document: document, folder: folder, documents: documents)
     {:ok, _document} = Containers.delete_document(document)
 
     documents = Containers.list_folder_documents(folder)
 
     if length(documents) > 0 do
       conn
-      # folder_document_path(conn_or_endpoint, :show, folder_id, id, params \\ [])
       |> redirect(
         to:
           Routes.folder_document_path(conn, :show, folder_id, List.first(documents).id, documents)
@@ -99,7 +92,5 @@ defmodule NotecastappWeb.DocumentController do
 
     conn
     |> put_flash(:info, "Document deleted successfully.")
-
-    # |> redirect(to: Routes.folder_document_path(conn, :index, folder_id))
   end
 end

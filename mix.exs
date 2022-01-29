@@ -56,7 +56,8 @@ defmodule Notecastapp.MixProject do
       {:ex_aws, "~> 2.1"},
       {:ex_aws_s3, "~> 2.0"},
       {:uuid, "~> 1.1"},
-      {:tailwind, "~> 0.1", runtime: Mix.env() == :dev}
+      {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
+      {:temple, "~> 0.8.0"}
     ]
   end
 
