@@ -16,7 +16,7 @@ defmodule NotecastappWeb.Router do
   end
 
   scope "/", NotecastappWeb do
-    pipe_through [:browser, :authenticate_user] 
+    pipe_through :browser
 
     get "/", PageController, :index
     resources "/users", UserController, only: [:index, :show, :new, :create]
