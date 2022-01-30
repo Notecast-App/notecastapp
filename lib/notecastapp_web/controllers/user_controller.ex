@@ -26,11 +26,11 @@ defmodule NotecastappWeb.UserController do
     case Accounts.register_user(user_params) do
       {:ok, user} ->
         conn
+        |> Tutorial.create_tutorial(user)
         |> NotecastappWeb.Auth.login(user)
         |> put_flash(:info, "#{user.email} created!")
         |> redirect(to: Routes.folder_path(conn, :index))
 
-        Tutorial.create_tutorial(user)
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
