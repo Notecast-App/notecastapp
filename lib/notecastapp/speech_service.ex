@@ -48,18 +48,22 @@ defmodule Notecastapp.SpeechService do
 
   # Generate the audio output
   def text_to_speech(xml, document) do
-    case HTTPoison.post(
-           "https://#{System.get_env("REGION_IDENTIFIER")}.tts.speech.microsoft.com/cognitiveservices/v1",
-           "<speak version='1.0' xml:lang='en-US'>" <> xml <> "</speak>",
-           [
-             {"Authorization", "Bearer #{Containers.get_active_token().value}"},
-             {"Content-Type", "application/ssml+xml"},
-             {"X-Microsoft-OutputFormat", "audio-48khz-192kbitrate-mono-mp3"},
-             {"User-Agent", "Logpod"}
-           ]
-         ) do
-      {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
-        body
+    if String.length(xml) > 0 do
+      case HTTPoison.post(
+             "https://#{System.get_env("REGION_IDENTIFIER")}.tts.speech.microsoft.com/cognitiveservices/v1",
+             "<speak version='1.0' xml:lang='en-US'>" <> xml <> "</speak>",
+             [
+               {"Authorization", "Bearer #{Containers.get_active_token().value}"},
+               {"Content-Type", "application/ssml+xml"},
+               {"X-Microsoft-OutputFormat", "audio-48khz-192kbitrate-mono-mp3"},
+               {"User-Agent", "Logpod"}
+             ]
+           ) do
+        {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
+          body
+      end
+    else
+        ""
     end
   end
 
