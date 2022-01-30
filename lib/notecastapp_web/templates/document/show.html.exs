@@ -1,7 +1,7 @@
 div id: "editor", class: "flex space-x-32 flex-row pt-12" do
 
   div class: "w-3/12" do
-    c Sidebar, title: @folder.title, documents: @documents, folder: @folder.id
+    c Sidebar, title: @folder.title, documents: @documents, folder: @folder.id, current: @document.id
   end
 
   div class: "w-9/12" do
