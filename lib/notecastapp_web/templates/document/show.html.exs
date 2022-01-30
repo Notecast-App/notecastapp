@@ -11,6 +11,18 @@ div id: "editor", class: "flex space-x-32 flex-row pt-12" do
 
 end
 
+style do: """
+mark {
+  cursor: pointer;
+  /*background-color: transparent !important;*/
+}
+
+mark:hover {
+  /*background-color: #D1EECE !important;*/
+  filter: invert(1);
+}
+"""
+
 script do: """
 const play = (id, rate, button_id, speed) => {
     const audio = document.getElementById(id)

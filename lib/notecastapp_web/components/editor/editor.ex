@@ -12,7 +12,7 @@ defmodule NotecastappWeb.Components.Editor do
 			c Menu, items: assigns[:items]
 
 			div class: "mt-8 space-y-4" do
-				input placeholder: "Enter document title...", value: assigns[:title], class: "font-serif font-medium font-heading text-2xl font-extrabold  text-neutral-800 placeholder-neutral-400", id: "input-title" 
+				input placeholder: "Enter document title...", value: assigns[:title], class: "font-serif font-medium font-heading text-2xl font-extrabold text-neutral-800 placeholder-neutral-400", id: "input-title" 
 
 				div onclick: "focusParent()" do
 					div onclick: "window.editor.commands.extendMarkRange('highlight')", class: "prose font-mono element"

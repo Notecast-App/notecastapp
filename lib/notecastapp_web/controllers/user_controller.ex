@@ -3,7 +3,7 @@ defmodule NotecastappWeb.UserController do
 
   alias Notecastapp.Accounts
   alias Notecastapp.Accounts.User
-  # alias Notecastapp.Tutorial
+  alias Notecastapp.Tutorial
 
   plug :authenticate_user when action in [:index, :show]
 
@@ -28,9 +28,9 @@ defmodule NotecastappWeb.UserController do
         conn
         |> NotecastappWeb.Auth.login(user)
         |> put_flash(:info, "#{user.email} created!")
-        |> redirect(to: Routes.cast_path(conn, :index))
+        |> redirect(to: Routes.folder_path(conn, :index))
 
-      # Tutorial.create_tutorial(user)
+        Tutorial.create_tutorial(user)
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
