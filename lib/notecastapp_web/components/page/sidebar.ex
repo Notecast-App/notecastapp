@@ -29,7 +29,6 @@ defmodule NotecastappWeb.Components.Sidebar do
           end
         end
 
-
         div class: "flex flex-col mt-4 space-y-1" do
           for document <- @documents do
             if document.id == assigns[:current] do
