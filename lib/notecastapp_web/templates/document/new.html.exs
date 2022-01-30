@@ -5,17 +5,35 @@ div id: "editor", class: "flex space-x-32 flex-row hidden pt-12" do
   end
 
   div class: "w-9/12" do
-    c Editor, cancel: "window.location = '/manage/folders/#{@folder.id}'", items: options(@folder) do
-      slot :form do
-        form_for @changeset, Routes.folder_document_path(@conn, :create, @folder.id), fn f ->
-          text_input f, :title, id: "title", class: "hidden"
+    if @folder.language == true do
+      c Editor, cancel: "window.location = '/manage/folders/#{@folder.id}'", items: options(@folder) do
+        slot :form do
+          form_for @changeset, Routes.folder_document_path(@conn, :create, @folder.id), fn f ->
+            text_input f, :title, id: "title", class: "hidden"
 
-          text_input f, :script, id: "script", class: "hidden"
+            text_input f, :script, id: "script", class: "hidden"
 
-          text_input f, :voice, id: "voice", value: "test", class: "hidden"
+            text_input f, :voice, id: "voice", value: "test", class: "hidden"
 
-          submit id: "submit", class: "hover:bg-sky-200 hover:text-neutral-800 bg-neutral-800 text-white rounded-2xl py-3 px-8 font-medium" do 
-            "Save document"
+            submit id: "submit", class: "hover:bg-sky-200 hover:text-neutral-800 bg-neutral-800 text-white rounded-2xl py-3 px-8 font-medium" do 
+              "Save document"
+            end
+          end
+        end
+      end
+    else
+      c Editor, cancel: "window.location = '/manage/folders/#{@folder.id}'", items: %{"🔊": "#caf0cb"} do
+        slot :form do
+          form_for @changeset, Routes.folder_document_path(@conn, :create, @folder.id), fn f ->
+            text_input f, :title, id: "title", class: "hidden"
+
+            text_input f, :script, id: "script", class: "hidden"
+
+            text_input f, :voice, id: "voice", value: "test", class: "hidden"
+
+            submit id: "submit", class: "hover:bg-sky-200 hover:text-neutral-800 bg-neutral-800 text-white rounded-2xl py-3 px-8 font-medium" do 
+              "Save document"
+            end
           end
         end
       end

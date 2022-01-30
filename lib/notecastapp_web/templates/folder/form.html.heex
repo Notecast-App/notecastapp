@@ -14,9 +14,11 @@
 
     <div class="flex flex-col space-y-1">
     <%= label f, :language  %>
-    <%= select f, :language, [[key: "Multilingual", value: "true"], [key: "English-only", value: "false"]], class: "rounded-xl border border-neutral-300" %>
+    <%= select f, :language, [[key: "Multilingual", value: "true"], [key: "English-only", value: "false"]], class: "rounded-xl border border-neutral-300", id: "language" %>
     <%= error_tag f, :language %>
     </div>
+
+    <div id="languages">
 
     <div class="flex flex-col space-y-1">
     <%= label f, :language_one  %>
@@ -61,7 +63,7 @@
       [key: "🇹🇷 Turkish", value: "🇹🇷, tr-TR-EmelNeural"],
       [key: "🇺🇦 Ukrainian", value: "🇺🇦, uk-UA-PolinaNeural"],
       [key: "🇻🇳 Vietnamese", value: "🇻🇳, vi-VN-HoaiMyNeural"]
-      ], class: "rounded-xl border border-neutral-300" %>
+      ], class: "rounded-xl border border-neutral-300", id: "language_two" %>
     <%= error_tag f, :language_one %>
     </div>
 
@@ -108,12 +110,34 @@
       [key: "🇹🇷 Turkish", value: "🇹🇷, tr-TR-EmelNeural"],
       [key: "🇺🇦 Ukrainian", value: "🇺🇦, uk-UA-PolinaNeural"],
       [key: "🇻🇳 Vietnamese", value: "🇻🇳, vi-VN-HoaiMyNeural"]
-      ], class: "rounded-xl border border-neutral-300" %>
+      ], class: "rounded-xl border border-neutral-300", id: "language_one" %>
     <%= error_tag f, :language_two %>
     </div>
+    </div>
+
+
   </div>
 
   <div>
     <%= submit "Save", class: "hover:bg-sky-200 hover:text-neutral-800 bg-neutral-800 text-white rounded-2xl py-3 px-8 font-medium" %>
   </div>
 </.form>
+
+<script>
+document.getElementsByTagName('select')[0].onchange = function() {
+  var index = this.selectedIndex;
+  var inputText = this.children[index].innerHTML.trim();
+  console.log(inputText);
+}
+
+document.getElementById('language').onchange = function(e) {
+   if (e.target.value == "false") {
+      document.getElementById('language_one').value = "🇺🇸, en-US-AmberNeural"
+      document.getElementById('language_two').value = "🇺🇸, en-US-AmberNeural"
+
+      document.getElementById('languages').classList.add("hidden")
+   } else {
+      document.getElementById('languages').classList.remove("hidden")
+   }
+}
+</script>
