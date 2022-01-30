@@ -5,7 +5,7 @@ div id: "editor", class: "flex space-x-32 flex-row hidden pt-12" do
   end
 
   div class: "w-9/12" do
-    c Editor, items: options(@folder) do
+    c Editor, cancel: "window.location = '/manage/folders/#{@folder.id}'", items: options(@folder) do
       slot :form do
         form_for @changeset, Routes.folder_document_path(@conn, :create, @folder.id), fn f ->
           text_input f, :title, id: "title", class: "hidden"

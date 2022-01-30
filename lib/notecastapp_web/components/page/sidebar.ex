@@ -10,8 +10,10 @@ defmodule NotecastappWeb.Components.Sidebar do
       div class: "flex flex-col h-full" do
 
         div do
-          c Button, button_style: :primary_small do
-            "All folders"
+          div class: "inline-block" do
+            c Button, onclick: "window.location = '/manage/folders'", button_style: :primary_small do
+              "All folders"
+            end
           end
         end
 

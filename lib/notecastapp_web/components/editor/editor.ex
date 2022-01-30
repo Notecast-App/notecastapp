@@ -20,7 +20,7 @@ defmodule NotecastappWeb.Components.Editor do
 			end
 
 			div class: "mt-24 flex flex-row ml-auto sticky bottom-4 space-x-2" do
-			   c Button, button_style: :secondary do
+			   c Button, onclick: assigns[:cancel], button_style: :secondary do
 			   	"Cancel"
 			   end
         slot :form

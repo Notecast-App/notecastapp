@@ -5,7 +5,7 @@ div id: "editor", class: "flex space-x-32 flex-row pt-12" do
   end
 
   div class: "w-9/12" do
-    c Display, title: @document.title, filename: @document.filename, content: raw(@document.script), items: options(@folder), edit: "#{@document.id}/edit" do
+    c Display, title: @document.title, filename: @document.filename, content: raw(@document.script), items: options(@folder), edit: "window.location = '/manage/folders/#{@folder.id}/documents/#{@document.id}/edit'" do
     end
   end
 
